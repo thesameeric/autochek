@@ -1,7 +1,6 @@
 import {
   IsString,
   IsEmail,
-  IsPhoneNumber,
   IsNumber,
   IsInt,
   Min,
@@ -25,7 +24,6 @@ export class CreateLoanRequestDto {
   @IsNotEmpty()
   nin: number;
 
-  @IsPhoneNumber(null)
   @IsNotEmpty()
   phone: string;
 

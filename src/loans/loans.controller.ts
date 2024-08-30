@@ -10,6 +10,7 @@ import {
 import { LoansService } from './loans.service';
 import { CreateLoanRequestDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
+import { UpdateLoanStatusDto } from './dto/update-loan-status.dto';
 
 @Controller('loans')
 export class LoansController {
@@ -18,6 +19,14 @@ export class LoansController {
   @Post()
   create(@Body() createLoanDto: CreateLoanRequestDto) {
     return this.loansService.create(createLoanDto);
+  }
+
+  @Post('/status/:id')
+  updateLoanStatus(
+    @Param('id') id: string,
+    @Body() loanStatusRequest: UpdateLoanStatusDto,
+  ) {
+    return this.loansService.updateLoanStatus(+id, loanStatusRequest);
   }
 
   @Get()
