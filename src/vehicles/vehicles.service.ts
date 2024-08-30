@@ -26,6 +26,9 @@ export class VehiclesService {
     const vehicleLookupDetails = await vinLookup(vin);
     let vehicle = await this.vehicleRepository.findOne('vin', vin);
 
+    if (!Object.keys(vehicleLookupDetails).includes('uid'))
+      throw new HttpException('Unable to lookup VIN', HttpStatus.BAD_REQUEST);
+
     if (!vehicle) {
       const createVehicleDto = {
         make: vehicleLookupDetails.make,

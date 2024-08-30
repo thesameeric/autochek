@@ -11,7 +11,9 @@ import { LoansService } from './loans.service';
 import { CreateLoanRequestDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
 import { UpdateLoanStatusDto } from './dto/update-loan-status.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Loans')
 @Controller('loans')
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}
