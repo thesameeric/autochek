@@ -1,8 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin.dto';
-import { Public } from 'src/guards/auth.guard';
+import { Public } from '../guards/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 
 @Public()
@@ -16,6 +16,7 @@ export class AuthController {
     return this.authService.signup(createUserDto);
   }
 
+  @HttpCode(200)
   @Post('/signin')
   signin(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto);

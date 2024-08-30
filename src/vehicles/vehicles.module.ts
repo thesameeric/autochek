@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Vehicle } from './entities/vehicle.entity';
 import { VehicleValuation } from './entities/valuation.entity';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Vehicle, VehicleValuation])],
