@@ -89,7 +89,6 @@ describe('Loan Module (e2e)', () => {
       .set('Authorization', `Bearer ${jwtToken}`)
       .expect(200)
       .then((response) => {
-        console.log(response);
         expect(response.body).toMatchObject({
           id: loanId,
           othernames: expect.any(String),
