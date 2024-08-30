@@ -5,6 +5,7 @@ import {
   IsInt,
   Min,
   IsNotEmpty,
+  IsDate,
 } from 'class-validator';
 
 export class CreateLoanRequestDto {
@@ -30,6 +31,14 @@ export class CreateLoanRequestDto {
   @IsString()
   @IsNotEmpty()
   reasonForLoan: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  income: number;
+
+  @IsDate()
+  @IsNotEmpty()
+  dob: Date;
 
   @IsNumber()
   @Min(0)

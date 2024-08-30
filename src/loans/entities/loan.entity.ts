@@ -36,6 +36,12 @@ export class LoanRequest {
   @Column()
   reasonForLoan: string;
 
+  @Column()
+  income: number;
+
+  @Column()
+  dob: Date;
+
   @Column('decimal', { precision: 10, scale: 2 })
   requestedAmount: number;
 

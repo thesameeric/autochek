@@ -39,4 +39,33 @@ export class LoansService {
   remove(id: number) {
     return this.loanRepository.deleleOne(id);
   }
+
+  checkEligibility(data: { dob: Date; income: number }) {
+    const { dob, income } = data;
+    const currentDate = new Date();
+    let age = currentDate.getFullYear() - dob.getFullYear();
+    const monthDifference = currentDate.getMonth() - dob.getMonth();
+    const dayDifference = currentDate.getDate() - dob.getDate();
+
+    // Adjust age if the birthdate hasn't occurred yet this year
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+      age--;
+    }
+
+    if (age < 18) {
+      return 'You must be at least 18 years old to be eligible for a loan.';
+    }
+
+    // Determine loan eligibility based on income
+    let loanAmount: number;
+    if (income < 50000) {
+      loanAmount = 50000; // Minimum loan amount for low income
+    } else if (income >= 50000 && income < 100000) {
+      loanAmount = income * 2;
+    } else {
+      loanAmount = income * 3;
+    }
+
+    return `You are eligible for a loan of ₦${loanAmount}.`;
+  }
 }
