@@ -17,7 +17,8 @@ export class VehiclesService {
 
   async findOne(id: number) {
     const vehicle = await this.vehicleRepository.findOne('id', id);
-    if (!vehicle) throw new HttpException('Vehicle not found', HttpStatus.NOT_FOUND);
+    if (!vehicle)
+      throw new HttpException('Vehicle not found', HttpStatus.NOT_FOUND);
     return vehicle;
   }
 
