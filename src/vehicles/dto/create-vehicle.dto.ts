@@ -29,6 +29,18 @@ export class CreateVehicleDto {
   @IsNotEmpty()
   vin: string;
 
+  @IsString()
+  @IsNotEmpty()
+  trim: string;
+
+  @IsString()
+  @IsNotEmpty()
+  trim_code: string;
+
+  @IsString()
+  @IsNotEmpty()
+  weight: string;
+
   @IsNumber()
   mileage: number;
 

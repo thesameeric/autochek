@@ -4,10 +4,14 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  OneToOne,
+  BaseEntity,
 } from 'typeorm';
+import { VehicleValuation } from './valuation.entity';
 
 @Entity()
-export class Vehicle {
+export class Vehicle extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,6 +28,15 @@ export class Vehicle {
   color: string;
 
   @Column()
+  trim: string;
+
+  @Column()
+  trim_code: string;
+
+  @Column()
+  weight: string;
+
+  @Column()
   vin: string;
 
   @Column()
@@ -37,6 +50,14 @@ export class Vehicle {
 
   @Column({ default: true })
   isAvailable: boolean;
+
+  @OneToOne(() => VehicleValuation, {
+    nullable: true,
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  valuation: VehicleValuation;
 
   @CreateDateColumn()
   createdAt: Date;

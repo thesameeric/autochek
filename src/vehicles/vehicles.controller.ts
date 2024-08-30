@@ -24,6 +24,11 @@ export class VehiclesController {
     return this.vehiclesService.findAll();
   }
 
+  @Get('valuation:vin')
+  valuation(@Param('vin') vin: string) {
+    return this.vehiclesService.valuation(vin);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.vehiclesService.findOne(+id);

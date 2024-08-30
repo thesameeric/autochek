@@ -58,6 +58,7 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+Vin '5FRYD4H66GB592800'
 ## Resources
 
 Check out a few resources that may come in handy when working with NestJS:
