@@ -23,6 +23,20 @@ CRUD endpoints for loan application, and checking for loan eligibility.
 ## API Documentaion
 - The API is documented using Swagger and the @Nestje/Swagger library which automatically documents the API. the docs can be visited from ```localhost:3000/api-docs```
 
+## Environment variables 
+We manage 2 different environment variables, one for development and another for test
+- .env.development
+- .env.test
+
+ensure the database names are different. Test database are deleted using the Teardown mechanism.
+
+```bash
+SECRET=testecret
+DATABASE=test-database.sqlite
+NODE_ENV=test
+````
+
+
 ## Project setup
 
 ```bash
@@ -43,10 +57,9 @@ $ yarn run start:prod
 ```
 
 ## Run tests
+End to end tests are used to test major components in the system.
 
 ```bash
-# unit tests
-$ yarn run test
 
 # e2e tests
 $ yarn run test:e2e
