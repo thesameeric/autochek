@@ -16,7 +16,12 @@ async function bootstrap() {
     .setTitle('Autochek')
     .setDescription('Autocheck API description')
     .setVersion('1.0')
-    .addTag('')
+    .addBearerAuth({
+      in: 'header',
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

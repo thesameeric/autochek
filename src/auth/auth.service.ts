@@ -1,13 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private jwtService: JwtService,
+  ) {}
 
   async signup(data: CreateUserDto) {
     const { email, password, firstName, otherNames } = data;
@@ -31,7 +34,10 @@ export class AuthService {
     });
     delete user.password;
     console.log(process.env.SECRET);
-    const token = await jwt.sign(user, process.env.SECRET, { expiresIn: '3d' });
+    const token = await this.jwtService.signAsync({
+      id: user.id,
+      email: user.email,
+    });
     return { user, token };
   }
 
@@ -52,11 +58,10 @@ export class AuthService {
         HttpStatus.UNAUTHORIZED,
       );
     }
-    const token = await jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.SECRET,
-      { expiresIn: '3d' },
-    );
+    const token = await this.jwtService.signAsync({
+      id: user.id,
+      email: user.email,
+    });
     delete user.password;
 
     return {

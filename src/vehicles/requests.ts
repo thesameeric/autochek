@@ -12,6 +12,11 @@ export const vinLookup = async (vin: string) => {
       'x-rapidapi-host': 'vin-lookup2.p.rapidapi.com',
     },
   };
-  const response = await axios.request(options);
-  return response?.data;
+  try {
+    const response = await axios.request(options);
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Unable to lookup VIN');
+  }
 };
