@@ -33,7 +33,6 @@ export class AuthService {
       password: hashedPassword,
     });
     delete user.password;
-    console.log(process.env.SECRET);
     const token = await this.jwtService.signAsync({
       id: user.id,
       email: user.email,
